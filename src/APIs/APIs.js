@@ -228,7 +228,7 @@ export function recoverVerifyEmailRequest(email) {
     return axios.get(URL, axiosHeader).then((res) => {
         Store.dispatch(hideLoader())
         if (res.status === 200) {
-            if(res.data['status'] === 'fail'){
+            if (res.data['status'] === 'fail') {
                 ErrorToast('No user found');
                 return false;
             }
@@ -256,7 +256,7 @@ export function recoverVerifyOTPRequest(email, OTP) {
     return axios.get(URL, axiosHeader).then((res) => {
         Store.dispatch(hideLoader())
         if (res.status === 200) {
-            if(res.data['status'] === 'fail'){
+            if (res.data['status'] === 'fail') {
                 ErrorToast(res.data['data'])
                 return false;
             }
@@ -276,20 +276,20 @@ export function recoverVerifyOTPRequest(email, OTP) {
     })
 }
 
-export function recoverResetPassRequest(email, OTP, password){
+export function recoverResetPassRequest(email, OTP, password) {
     Store.dispatch(showLoader())
 
-    let URL = BASE_URL+'/recoverResetPass';
-    let postBody = {email: email, OTP:OTP, password:password};
+    let URL = BASE_URL + '/recoverResetPass';
+    let postBody = { email: email, OTP: OTP, password: password };
 
     return axios.post(URL, postBody).then((res) => {
         Store.dispatch(hideLoader())
-        if(res.status === 200){
-            if(res.data['status']==="fail"){
+        if (res.status === 200) {
+            if (res.data['status'] === "fail") {
                 ErrorToast(res.data['data']);
                 return false;
             }
-            else{
+            else {
                 setOTP(OTP)
                 SuccessToast("NEW PASSWORD CREATED");
                 return true;
